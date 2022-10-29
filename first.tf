@@ -34,6 +34,7 @@ resource "aws_security_group" "allow_http" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
+/*
   ingress {
     description      = "https from VPC"
     from_port        = 443
@@ -41,6 +42,7 @@ resource "aws_security_group" "allow_http" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
+*/
 
   ingress {
     description      = "http from VPC"
