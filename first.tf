@@ -9,7 +9,12 @@ resource "aws_instance" "t2micro_ubuntu22" {
         Name = "t2micro_ubuntu22"
         Env = "test"
     }
-    user_data = file("user_data.sh")
+    // user_data = file("user_data.sh")
+    user_data = templatefile("user_data.sh.tpl", {
+        site_name = "Webserver",
+        site_owner = "Silicon ltd.",
+        names = ["John", "Sherlok", "Maria"]
+    })
 }
 
 resource "aws_security_group" "allow_http" {
