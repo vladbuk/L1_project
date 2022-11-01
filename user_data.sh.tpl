@@ -5,7 +5,7 @@ myip=$(curl ifconfig.io)
 cat <<EOF | sudo tee /var/www/html/index.html
 <html>
     <h1>My ${site_name} running on IP: $myip</h1>
-    <p>Builded by Terraform and ${owner_name}</p>
+    <p>Builded by Terraform and ${site_owner}</p>
 
     %{ for x in names ~}
         <p>Hello to ${x} from ${site_owner}</p>
