@@ -22,8 +22,8 @@ resource "aws_security_group" "allow_http" {
   description = "Allow http inbound traffic" 
 
   dynamic "ingress" {
-    for_each = ["80", "443", "8080", "50000-51000"]
-    content = {
+    for_each = ["80", "443", "8080", "10500"]
+    content {
       description      = "http from VPC"
       from_port        = ingress.value
       to_port          = ingress.value
