@@ -19,28 +19,21 @@ resource "aws_instance" "t2micro_ubuntu22" {
 
 resource "aws_security_group" "allow_http" {
   name        = "allow_http"
-  description = "Allow http inbound traffic"  
+  description = "Allow http inbound traffic" 
 
-  ingress {
-    description      = "http from VPC"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = ["80", "443", "8080", "50000-51000"]
+    content = {
+      description      = "http from VPC"
+      from_port        = ingress.value
+      to_port          = ingress.value
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+    }
   }
 
-/*
   ingress {
-    description      = "https from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-*/
-
-  ingress {
-    description      = "http from VPC"
+    description      = "icmp from VPC"
     from_port        = -1
     to_port          = -1
     protocol         = "icmp"
@@ -48,6 +41,7 @@ resource "aws_security_group" "allow_http" {
   }
 
   egress {
+    description = "Outbound all packets"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
