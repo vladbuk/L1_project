@@ -13,8 +13,13 @@ resource "aws_instance" "t2micro_ubuntu22" {
     user_data = templatefile("user_data.sh.tpl", {
         site_name = "Webserver",
         site_owner = "Silicon ltd.",
-        names = ["John", "Sherlok", "Maria"]
+        names = ["John", "Sherlok", "Maria", "Mark"]
     })
+
+    lifecycle {
+      //prevent_destroy = true
+      //create_before_destroy = true
+    }
 }
 
 resource "aws_security_group" "allow_http" {
