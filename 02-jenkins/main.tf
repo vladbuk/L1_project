@@ -16,6 +16,13 @@ resource "aws_instance" "t2micro_jenkins" {
     }
 }
 
+resource "aws_volume_attachment" "backup2gb" {
+  device_name = "/dev/xvdb"
+  volume_id   = "vol-0c42799db22d24fd5"
+  instance_id = aws_instance.t2micro_jenkins.id
+}
+
+
 resource "aws_security_group" "allow_http" {
   name        = "allow_http"
   description = "Allow http inbound traffic" 
