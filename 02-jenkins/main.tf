@@ -1,21 +1,15 @@
 provider "aws" {}
 
-resource "aws_instance" "t2micro_ubuntu22" {
+resource "aws_instance" "t2micro_jenkins" {
     ami = "ami-0caef02b518350c8b"
     instance_type = "t2.micro"
     vpc_security_group_ids = [ aws_security_group.allow_http.id, aws_security_group.allow_ssh.id ]
     key_name = "ter_aws_key"
     tags = {
-        Name = "t2micro_ubuntu22"
+        Name = "t2micro_jenkins"
         Env = "test"
     }
-    // user_data = file("user_data.sh")
-    user_data = templatefile("user_data.sh.tpl", {
-        site_name = "Webserver",
-        site_owner = "Silicon ltd.",
-        names = ["John", "Sherlok", "Maria", "Mark"]
-    })
-
+    user_data = file("user_data_jenkins.sh")
     lifecycle {
       //prevent_destroy = true
       //create_before_destroy = true
@@ -27,7 +21,7 @@ resource "aws_security_group" "allow_http" {
   description = "Allow http inbound traffic" 
 
   dynamic "ingress" {
-    for_each = ["80", "443", "8080", "10500"]
+    for_each = ["8080", "10500"]
     content {
       description      = "http from VPC"
       from_port        = ingress.value
