@@ -10,3 +10,5 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt update
 sudo apt install -y jenkins mc
+sudo mkdir /mnt/backup
+sudo mount /dev/xvdb /mnt/backup
