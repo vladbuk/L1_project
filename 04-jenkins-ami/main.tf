@@ -10,10 +10,26 @@ resource "aws_instance" "t2micro_jenkins" {
         Env = "test"
     }
     //user_data = file("user_data_jenkins.sh")
-    lifecycle {
+    /*lifecycle {
       //prevent_destroy = true
       //create_before_destroy = true
+    }*/
+}
+
+resource "aws_instance" "t2micro_jenkins_agent" {
+    ami = "ami-06148e0e81e5187c8"
+    instance_type = "t2.micro"
+    vpc_security_group_ids = [ aws_security_group.allow_http.id, aws_security_group.allow_ssh.id ]
+    key_name = "ter_aws_key"
+    tags = {
+        Name = "t2micro_jenkins_agent"
+        Env = "test"
     }
+    user_data = file("user_data_jenkins_agent.sh")
+    /*lifecycle {
+      //prevent_destroy = true
+      //create_before_destroy = true
+    }*/
 }
 
 resource "aws_security_group" "allow_http" {
@@ -21,7 +37,7 @@ resource "aws_security_group" "allow_http" {
   description = "Allow http inbound traffic" 
 
   dynamic "ingress" {
-    for_each = ["8080", "10500", "5000", "5022"]
+    for_each = ["8080", "10500", "5000", "5022", "2222"]
     content {
       description      = "http from VPC"
       from_port        = ingress.value
