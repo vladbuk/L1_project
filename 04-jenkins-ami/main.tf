@@ -1,7 +1,7 @@
 provider "aws" {}
 
 resource "aws_instance" "t2micro_jenkins" {
-    ami = "ami-0e8cbae065d25f022"
+    ami = "ami-0631683b745f664f7"
     instance_type = "t2.micro"
     vpc_security_group_ids = [ aws_security_group.allow_http.id, aws_security_group.allow_ssh.id ]
     key_name = "ter_aws_key"
