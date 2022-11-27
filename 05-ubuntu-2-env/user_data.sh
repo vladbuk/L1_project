@@ -9,4 +9,4 @@ sleep 5
 sudo apt install -y docker-ce
 sudo systemctl status docker
 sudo usermod -aG docker ubuntu
-sudo apt install nginx
+sudo apt install -y nginx
