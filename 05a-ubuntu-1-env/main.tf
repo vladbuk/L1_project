@@ -2,13 +2,13 @@ provider "aws" {
   region = "eu-central-1"
   //shared_config_files      = ["$HOME/.aws/config"]
   shared_credentials_files = ["$HOME/.aws/credentials"]
-  profile = "default"
+  profile = "vladbuk"
 }
 
 resource "aws_instance" "t2micro_ubuntu_test" {
     ami = "ami-06148e0e81e5187c8"
     instance_type = "t2.micro"
-    vpc_security_group_ids = [ aws_security_group.allow_http.id, aws_security_group.allow_ssh.id ]
+    vpc_security_group_ids = [ aws_security_group.allow_ports.id ]
     key_name = "ter_aws_key"
     tags = {
         Name = "t2micro_ubuntu_test"
@@ -21,14 +21,14 @@ resource "aws_instance" "t2micro_ubuntu_test" {
     }
 }
 
-resource "aws_security_group" "allow_http" {
-  name        = "allow_http"
-  description = "Allow http inbound traffic" 
+resource "aws_security_group" "allow_ports" {
+  name        = "allow_in_ports"
+  description = "Allow particular inbound traffic" 
 
   dynamic "ingress" {
-    for_each = ["80", "10500", "3000"]
+    for_each = ["22", "80", "10500", "3000"]
     content {
-      description      = "http from VPC"
+      description      = "open tcp ports"
       from_port        = ingress.value
       to_port          = ingress.value
       protocol         = "tcp"
@@ -37,7 +37,7 @@ resource "aws_security_group" "allow_http" {
   }
 
   ingress {
-    description      = "icmp from VPC"
+    description      = "open icmp traffic"
     from_port        = -1
     to_port          = -1
     protocol         = "icmp"
@@ -53,23 +53,6 @@ resource "aws_security_group" "allow_http" {
   }
 
   tags = {
-    Name = "allow_http_https"
-  }
-}
-
-resource "aws_security_group" "allow_ssh" {
-  name        = "allow_ssh"
-  description = "Allow ssh inbound traffic"  
-
-  ingress {
-    description      = "ssh from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "allow_ssh"
+    Name = "allow_tcp_icmp"
   }
 }
