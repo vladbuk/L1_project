@@ -26,7 +26,7 @@ resource "aws_security_group" "allow_ports" {
   description = "Allow particular inbound traffic" 
 
   dynamic "ingress" {
-    for_each = ["22", "80", "10500", "3000"]
+    for_each = ["22", "80", "8080", "3000"]
     content {
       description      = "open tcp ports"
       from_port        = ingress.value
