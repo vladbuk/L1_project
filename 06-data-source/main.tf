@@ -1,7 +1,7 @@
 provider "aws" {
   region = "eu-central-1"
   shared_credentials_files = ["$HOME/.aws/credentials"]
-  profile = "default"
+  profile = "vladbuk"
 }
 
 data "aws_caller_identity" "current_id" {}
