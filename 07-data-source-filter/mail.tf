@@ -14,10 +14,27 @@ data "aws_ami" "ubuntu20_latest" {
     }
 }
 
+data "aws_ami" "ami_linux_2_latest" {
+    owners = ["amazon"]
+    most_recent = true
+    filter {
+      name = "name"
+      values = ["amzn2-ami-kernel-5*-x86_64-gp2"]
+    }
+}
+
 output "ubuntu20_latest_name" {
     value = data.aws_ami.ubuntu20_latest.name
 }
 
 output "ubuntu20_latest_id" {
     value = data.aws_ami.ubuntu20_latest.id
+}
+
+output "ami_linux_2_latest_name" {
+    value = data.aws_ami.ami_linux_2_latest.name
+}
+
+output "ami_linux_2_latest_id" {
+    value = data.aws_ami.ami_linux_2_latest.id
 }
