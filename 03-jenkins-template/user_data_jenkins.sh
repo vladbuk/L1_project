@@ -24,7 +24,7 @@ sudo systemctl status docker
 sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
 
-sudo docker run -d --rm --name=agent1 -p 2222:22 -e "JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSENt/Q25Mx78htFJFuIZC1geaAzXd/puOealYFRfbelojVJkDtdQUwW+650DzWFKuXzvOPtO24hYmkVaLqQeDJIsjKgJD0whCLLT8gWvnEE6FRCVprx7MZzMbTG1c7en+RAoJ/plN1sLtRz96BtM3rztDsT+GpN1BNX8Y0nKZMcekYfcrOxNRPHQ0KnuU3eXi/Ly//fTziin/Bshxo46X7w5EVBYwtcDo6CCMRTl8TMl3x31xFVbzkml3/919YNoUZCPE3Uc0jOKmeDYM3m9RUN4CumiUPGJ28x6vP7JKpBZuLSQfEGWFufp0zSDQAlOSAL7X5Piv6CMEkhNr245q6Ml1Xr/gdGP072tBZLz7OhMkZeyoBgAvXf6pYCSu4rbGuRb8xto2MT+mKxthOpxgONSg3kjOGCFqpMnFTIyrB4hfpPw9JQuyRSZyT1jPcZR9cl00YmgZXcBDrXna/RgWBntPASg7kLvqbw+q9wZZyL095ezsiFSd+HYPNtD8Jm0= ut@ubuntu-desktop" jenkins/ssh-agent:latest
+#sudo docker run -d --rm --name=agent1 -p 2222:22 -e "JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSENt/Q25Mx78htFJFuIZC1geaAzXd/puOealYFRfbelojVJkDtdQUwW+650DzWFKuXzvOPtO24hYmkVaLqQeDJIsjKgJD0whCLLT8gWvnEE6FRCVprx7MZzMbTG1c7en+RAoJ/plN1sLtRz96BtM3rztDsT+GpN1BNX8Y0nKZMcekYfcrOxNRPHQ0KnuU3eXi/Ly//fTziin/Bshxo46X7w5EVBYwtcDo6CCMRTl8TMl3x31xFVbzkml3/919YNoUZCPE3Uc0jOKmeDYM3m9RUN4CumiUPGJ28x6vP7JKpBZuLSQfEGWFufp0zSDQAlOSAL7X5Piv6CMEkhNr245q6Ml1Xr/gdGP072tBZLz7OhMkZeyoBgAvXf6pYCSu4rbGuRb8xto2MT+mKxthOpxgONSg3kjOGCFqpMnFTIyrB4hfpPw9JQuyRSZyT1jPcZR9cl00YmgZXcBDrXna/RgWBntPASg7kLvqbw+q9wZZyL095ezsiFSd+HYPNtD8Jm0= ut@ubuntu-desktop" jenkins/ssh-agent:latest
 
 #VARS1="HOME=|USER=|MAIL=|LC_ALL=|LS_COLORS=|LANG="
 #VARS2="HOSTNAME=|PWD=|TERM=|SHLVL=|LANGUAGE=|_="
