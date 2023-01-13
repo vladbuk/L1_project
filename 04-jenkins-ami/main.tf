@@ -1,7 +1,7 @@
 provider "aws" {}
 
 resource "aws_instance" "t2micro_jenkins" {
-    ami = "ami-0631683b745f664f7"
+    ami = "ami-0857ac95076fa0684"
     instance_type = "t2.micro"
     vpc_security_group_ids = [ aws_security_group.allow_http.id, aws_security_group.allow_ssh.id ]
     key_name = "ter_aws_key"
@@ -16,6 +16,7 @@ resource "aws_instance" "t2micro_jenkins" {
     }*/
 }
 
+/*
 resource "aws_instance" "t2micro_jenkins_agent" {
     ami = "ami-06148e0e81e5187c8"
     instance_type = "t2.micro"
@@ -29,8 +30,9 @@ resource "aws_instance" "t2micro_jenkins_agent" {
     /*lifecycle {
       //prevent_destroy = true
       //create_before_destroy = true
-    }*/
+    }
 }
+*/
 
 resource "aws_security_group" "allow_http" {
   name        = "allow_http"
