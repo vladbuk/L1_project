@@ -1,4 +1,8 @@
-provider "aws" {}
+provider "aws" {
+  region = "eu-central-1"
+  shared_credentials_files = ["$HOME/.aws/credentials"]
+  profile = "vladbuk"
+}
 
 resource "aws_instance" "t2micro_jenkins" {
     ami = "ami-0857ac95076fa0684"
