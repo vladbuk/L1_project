@@ -46,6 +46,20 @@ resource "aws_network_interface" "ether1" {
 
 resource "aws_internet_gateway" "main_gw" {
   vpc_id = aws_vpc.main_vpc.id
+  tags = {
+    Name = "main_gateway"
+  }
+}
+
+resource "aws_route_table" "main_route" {
+  vpc_id = aws_vpc.main_vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main_gw.id
+  }
+  tags = {
+      Name = "main_route"
+  }
 }
 
 #-------------------------------------------------#
