@@ -20,6 +20,7 @@ data "aws_availability_zones" "working_zones" {}
 
 resource "aws_vpc" "main_vpc" {
   cidr_block = "172.16.0.0/16"
+  enable_dns_hostnames = true
   tags = {
     "Name" = "main_vpc"
     "Env" = "test"
@@ -30,6 +31,7 @@ resource "aws_subnet" "subnet1" {
   vpc_id = aws_vpc.main_vpc.id
   cidr_block = "172.16.1.0/24"
   availability_zone = data.aws_availability_zones.working_zones.names[0]
+  map_public_ip_on_launch = true
   tags = {
     "Name" = "Subnet1"
   }
@@ -127,14 +129,18 @@ resource "aws_security_group" "allow_ports" {
 
 #----------------------------------------#
 
-# output "instance_ubuntu_public_ip" {
-#   value = aws_instance.ubuntu.public_ip
-# }
+output "instance_ubuntu_public_ip" {
+  value = aws_instance.ubuntu.public_ip
+}
+
+output "instance_ubuntu_public_dns" {
+  value = aws_instance.ubuntu.public_dns
+}
 
 output "aws_ami" {
     value = data.aws_ami.ubuntu20_latest.id
 }
 
-output "aws_availability_zones" {
-    value = data.aws_availability_zones.working_zones.names 
-}
+# output "aws_availability_zones" {
+#     value = data.aws_availability_zones.working_zones.names 
+# }
