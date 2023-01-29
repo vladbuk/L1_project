@@ -1,6 +1,6 @@
 provider "aws" {
     region = "eu-central-1"
-    profile = "vladbuk"
+    profile = "default"
     shared_credentials_files = [ "$HOME/.aws/credentials" ]
 }
 
@@ -18,10 +18,10 @@ data "aws_availability_zones" "working_zones" {}
 
 resource "aws_security_group" "allow_ports" {
   name        = "allow_in_ports"
-  description = "Allow particular inbound traffic" 
+  description = "Open only needed ports" 
 
   dynamic "ingress" {
-    for_each = ["22", "80", "8080", "3000"]
+    for_each = ["22", "80", "8080"]
     content {
       description      = "open tcp ports"
       from_port        = ingress.value
